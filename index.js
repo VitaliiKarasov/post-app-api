@@ -7,7 +7,7 @@ const router = require('./router/index');
 const errorMiddleware = require('./middlewares/error-middleware');
 
 
-const PORT = process.env.PORT || 5001; 
+const PORT = process.env.PORT || 10000; 
 const app = express()
 
 app.use(express.json());
