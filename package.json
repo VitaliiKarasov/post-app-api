@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "build": "webpack --config=Scripts/config/webpack.prod.js"
+
   },
   "keywords": [],
   "author": "",
