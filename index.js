@@ -23,7 +23,9 @@ app.use((req, res, next) => {
     next();
   });
 
-app.use('/api', router, (req, res) => {
+app.use('/api', router)
+
+router.post('/login', (req, res) => {
     request(
       { url: 'https://post-app-api-production.up.railway.app/api/login' },
       (error, response, body) => {
@@ -35,6 +37,7 @@ app.use('/api', router, (req, res) => {
       }
     )
   });
+
 app.use(errorMiddleware);
 
 
