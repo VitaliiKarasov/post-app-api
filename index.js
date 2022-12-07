@@ -6,6 +6,9 @@ const mongoose = require('mongoose');
 const router = require('./router/index');
 const errorMiddleware = require('./middlewares/error-middleware');
 const request = require('request')
+const morgan = require("morgan");
+const { createProxyMiddleware } = require('http-proxy-middleware');
+require('dotenv').config()
 
 
 const PORT = process.env.PORT || 10000; 
@@ -19,12 +22,18 @@ app.use(cors({
 }));
 
 app.use('/api', router);
+app.use(morgan("dev"));
 
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    next();
-  });
-
+app.use(
+    "/login",
+    createProxyMiddleware({
+        target: API_SERVICE_URL,
+        changeOrigin: true,
+        pathRewrite: {
+            "^/login": "",
+        },
+    })
+);
 
   app.post('/login',(req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "https://post-app-api-production.up.railway.app/login");
