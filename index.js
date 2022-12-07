@@ -24,7 +24,7 @@ app.use((req, res, next) => {
 
 app.use('/api', router, (req, res) => {
     request(
-      { url: 'https://post-app-api-production.up.railway.app/api/router' },
+      { url: 'https://post-app-api-production.up.railway.app/api/login' },
       (error, response, body) => {
         if (error || response.statusCode !== 200) {
           return res.status(500).json({ type: 'error', message: err.message });
