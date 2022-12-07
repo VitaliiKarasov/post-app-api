@@ -36,7 +36,7 @@ app.use(
 );
 
   app.post('/login',(req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "https://post-app-api-production.up.railway.app/login");
+    res.setHeader("Access-Control-Allow-Origin", "*");
     res.header(
       "Access-Control-Allow-Headers",
       "Origin, X-Requested-With, Content-Type, Accept"
