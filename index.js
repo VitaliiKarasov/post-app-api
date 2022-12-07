@@ -18,22 +18,22 @@ app.use(cors({
     origin: process.env.CLIENT_URL
 }));
 
+app.use('/api', router);
+
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     next();
   });
 
 
-  app.post('/login',(req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "https://post-app-api-production.up.railway.app");
+  app.post('/api/login',(req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "https://post-app-api-production.up.railway.app/api/login");
     res.header(
       "Access-Control-Allow-Headers",
       "Origin, X-Requested-With, Content-Type, Accept"
     );
     next();
   });
-
-app.use('/api', router);
 
 // router.post('/login', (req, res) => {
 //     request(
