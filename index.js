@@ -5,10 +5,6 @@ const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const router = require('./router/index');
 const errorMiddleware = require('./middlewares/error-middleware');
-const request = require('request')
-const morgan = require("morgan");
-const { createProxyMiddleware } = require('http-proxy-middleware');
-require('dotenv').config()
 
 
 const PORT = process.env.PORT || 10000; 
@@ -22,40 +18,6 @@ app.use(cors({
 }));
 
 app.use('/api', router);
-app.use(morgan("dev"));
-
-app.use(
-    "/login",
-    createProxyMiddleware({
-        target: API_SERVICE_URL,
-        changeOrigin: true,
-        pathRewrite: {
-            "^/login": "",
-        },
-    })
-);
-
-  app.post('/login',(req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
-    );
-    next();
-  });
-
-// router.post('/login', (req, res) => {
-//     request(
-//       { url: 'https://post-app-api-production.up.railway.app/api/login' },
-//       (error, response, body) => {
-//         if (error || response.statusCode !== 200) {
-//           return res.status(500).json({ type: 'error', message: err.message });
-//         }
-  
-//         res.json(JSON.parse(body));
-//       }
-//     )
-//   });
 
 app.use(errorMiddleware);
 
